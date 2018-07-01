@@ -25,7 +25,8 @@ class ViewController: UIViewController, ARSCNViewDelegate,  SCNPhysicsContactDel
     var target : SCNNode?
     var score = 0
     
-    
+    // Instantiate the audio source
+    let audioSource = SCNAudioSource(fileNamed: "jump.mp3")!
     var timer = Each(2).seconds
 
     
@@ -50,6 +51,11 @@ class ViewController: UIViewController, ARSCNViewDelegate,  SCNPhysicsContactDel
             return .continue
         }
         
+        
+        // As an environmental sound layer, audio should play indefinitely
+        audioSource.loops = false
+        // Decode the audio from disk ahead of time to prevent a delay in playback
+        audioSource.load()
     }
     
     
@@ -89,6 +95,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,  SCNPhysicsContactDel
         eggNode?.physicsBody?.categoryBitMask = BitMaskCategory.target.rawValue
         eggNode?.physicsBody?.contactTestBitMask = BitMaskCategory.bullet.rawValue
 
+        
         sceneView.scene.rootNode.addChildNode(eggNode!)
 
     }
@@ -144,6 +151,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,  SCNPhysicsContactDel
         sceneView.scene.rootNode.addChildNode(confettiNode)
         self.score += 1
         
+        confettiNode.addAudioPlayer(SCNAudioPlayer(source: audioSource))
         DispatchQueue.main.async {
             self.scoreLabel.text = "\(self.score)"
         }

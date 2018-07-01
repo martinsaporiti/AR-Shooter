@@ -13,6 +13,7 @@
 		2996687520E8E9850022255C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2996687420E8E9850022255C /* Assets.xcassets */; };
 		2996687820E8E9850022255C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2996687620E8E9850022255C /* LaunchScreen.storyboard */; };
 		2996688220E8EC3E0022255C /* media.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 2996688120E8EC3E0022255C /* media.scnassets */; };
+		2996688C20E96A280022255C /* jump.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2996688B20E96A280022255C /* jump.mp3 */; };
 		F6886B0A8F9F5C96604B18F1 /* Pods_AR_Shooter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 860448D01011C9F942B71C56 /* Pods_AR_Shooter.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		2996687720E8E9850022255C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2996687920E8E9850022255C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2996688120E8EC3E0022255C /* media.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = media.scnassets; sourceTree = "<group>"; };
+		2996688B20E96A280022255C /* jump.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = jump.mp3; sourceTree = "<group>"; };
 		860448D01011C9F942B71C56 /* Pods_AR_Shooter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AR_Shooter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A38D040205BE03E92EAD14C /* Pods-AR-Shooter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR-Shooter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AR-Shooter/Pods-AR-Shooter.debug.xcconfig"; sourceTree = "<group>"; };
 		F819ADC6046304BEDE556297 /* Pods-AR-Shooter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR-Shooter.release.xcconfig"; path = "Pods/Target Support Files/Pods-AR-Shooter/Pods-AR-Shooter.release.xcconfig"; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				2996687420E8E9850022255C /* Assets.xcassets */,
 				2996687620E8E9850022255C /* LaunchScreen.storyboard */,
 				2996687920E8E9850022255C /* Info.plist */,
+				2996688B20E96A280022255C /* jump.mp3 */,
 				2996688120E8EC3E0022255C /* media.scnassets */,
 			);
 			path = "AR-Shooter";
@@ -152,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2996687820E8E9850022255C /* LaunchScreen.storyboard in Resources */,
+				2996688C20E96A280022255C /* jump.mp3 in Resources */,
 				2996687520E8E9850022255C /* Assets.xcassets in Resources */,
 				2996688220E8EC3E0022255C /* media.scnassets in Resources */,
 				2996687320E8E9810022255C /* Main.storyboard in Resources */,
@@ -353,7 +357,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NZ34D2LM93;
 				INFOPLIST_FILE = "AR-Shooter/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fluxit.AR-Shooter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -369,7 +376,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NZ34D2LM93;
 				INFOPLIST_FILE = "AR-Shooter/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fluxit.AR-Shooter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
