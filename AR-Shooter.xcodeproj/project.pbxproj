@@ -13,6 +13,7 @@
 		2996687520E8E9850022255C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2996687420E8E9850022255C /* Assets.xcassets */; };
 		2996687820E8E9850022255C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2996687620E8E9850022255C /* LaunchScreen.storyboard */; };
 		2996688220E8EC3E0022255C /* media.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 2996688120E8EC3E0022255C /* media.scnassets */; };
+		F6886B0A8F9F5C96604B18F1 /* Pods_AR_Shooter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 860448D01011C9F942B71C56 /* Pods_AR_Shooter.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,9 @@
 		2996687720E8E9850022255C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2996687920E8E9850022255C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2996688120E8EC3E0022255C /* media.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = media.scnassets; sourceTree = "<group>"; };
+		860448D01011C9F942B71C56 /* Pods_AR_Shooter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AR_Shooter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A38D040205BE03E92EAD14C /* Pods-AR-Shooter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR-Shooter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AR-Shooter/Pods-AR-Shooter.debug.xcconfig"; sourceTree = "<group>"; };
+		F819ADC6046304BEDE556297 /* Pods-AR-Shooter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR-Shooter.release.xcconfig"; path = "Pods/Target Support Files/Pods-AR-Shooter/Pods-AR-Shooter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6886B0A8F9F5C96604B18F1 /* Pods_AR_Shooter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,8 @@
 			children = (
 				2996686C20E8E9810022255C /* AR-Shooter */,
 				2996686B20E8E9810022255C /* Products */,
+				4F2A9360B4357B0607E87AF2 /* Pods */,
+				5388B31A374C928E773F041C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +74,23 @@
 			path = "AR-Shooter";
 			sourceTree = "<group>";
 		};
+		4F2A9360B4357B0607E87AF2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9A38D040205BE03E92EAD14C /* Pods-AR-Shooter.debug.xcconfig */,
+				F819ADC6046304BEDE556297 /* Pods-AR-Shooter.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		5388B31A374C928E773F041C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				860448D01011C9F942B71C56 /* Pods_AR_Shooter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +98,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2996687C20E8E9850022255C /* Build configuration list for PBXNativeTarget "AR-Shooter" */;
 			buildPhases = (
+				A04669939E9FE8CFE6095311 /* [CP] Check Pods Manifest.lock */,
 				2996686620E8E9810022255C /* Sources */,
 				2996686720E8E9810022255C /* Frameworks */,
 				2996686820E8E9810022255C /* Resources */,
+				894611BFDA7BCA3175B137A4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,6 +159,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		894611BFDA7BCA3175B137A4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-AR-Shooter/Pods-AR-Shooter-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Each/Each.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Each.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AR-Shooter/Pods-AR-Shooter-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A04669939E9FE8CFE6095311 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AR-Shooter-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2996686620E8E9810022255C /* Sources */ = {
@@ -282,15 +347,13 @@
 		};
 		2996687D20E8E9850022255C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A38D040205BE03E92EAD14C /* Pods-AR-Shooter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NZ34D2LM93;
 				INFOPLIST_FILE = "AR-Shooter/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fluxit.AR-Shooter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -300,15 +363,13 @@
 		};
 		2996687E20E8E9850022255C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F819ADC6046304BEDE556297 /* Pods-AR-Shooter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NZ34D2LM93;
 				INFOPLIST_FILE = "AR-Shooter/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fluxit.AR-Shooter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

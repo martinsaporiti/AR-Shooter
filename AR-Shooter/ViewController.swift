@@ -8,21 +8,26 @@
 
 import UIKit
 import ARKit
-
+import Each
 enum BitMaskCategory : Int {
     case bullet = 2
     case target = 3
 }
 
-class ViewController: UIViewController, SCNPhysicsContactDelegate{
+class ViewController: UIViewController, ARSCNViewDelegate,  SCNPhysicsContactDelegate{
 
     
+    @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var sceneView: ARSCNView!
     
     let configuration = ARWorldTrackingConfiguration()
     var power : Float = 50
     var target : SCNNode?
+    var score = 0
     
+    
+    var timer = Each(2).seconds
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,26 +38,52 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate{
         sceneView.autoenablesDefaultLighting = true
 //        configuration.planeDetection = .horizontal
         self.sceneView.scene.physicsWorld.contactDelegate = self
-        
+        self.sceneView.delegate = self
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         sceneView.addGestureRecognizer(tapGestureRecognizer)
         
         tapGestureRecognizer.cancelsTouchesInView = false
         sceneView.session.run(configuration)
         
+        self.timer.perform{ () -> NextStep in
+            self.createEgg()
+            return .continue
+        }
+        
     }
     
+    
+    func createEgg(){
+//        guard let pointOfView = self.sceneView.pointOfView else {return}
+        
+//        let transform = pointOfView.transform
+//        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
+//        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
+//
+//        let position = location + orientation
+        
+        addEgg(x: Float(randomNumbers(firstNum: -1, secondNum: 1)), y:  Float(randomNumbers(firstNum: 0, secondNum: 3)), z: Float(randomNumbers(firstNum: -2, secondNum: -10)))
+    }
+    
+    
     @IBAction func addTargets(_ sender: UIButton) {
-        addEgg(x: 5, y: 0, z: -40)
-        addEgg(x: 0, y: 0, z: -40)
-        addEgg(x: -5, y: 0, z: -40)
+        guard let pointOfView = self.sceneView.pointOfView else {return}
+        
+        let transform = pointOfView.transform
+        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
+        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
+        
+        let position = location + orientation
+        
+        addEgg(x: position.x + 50, y: position.y, z: position.z - 40)
+        addEgg(x: position.x, y: position.y, z: position.z - 40)
+        addEgg(x: position.x - 50, y: position.y, z: position.z - 40)
     }
     
     
     func addEgg(x: Float, y: Float, z: Float){
         let eggScene = SCNScene(named: "media.scnassets/egg.scn")
         let eggNode = eggScene?.rootNode.childNode(withName: "egg", recursively: false)
-        
         eggNode?.position = SCNVector3(x, y, z)
         eggNode?.physicsBody =  SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: eggNode!, options: nil))
         eggNode?.physicsBody?.categoryBitMask = BitMaskCategory.target.rawValue
@@ -111,13 +142,21 @@ class ViewController: UIViewController, SCNPhysicsContactDelegate{
         confettiNode.position = contact.contactPoint
         target?.removeFromParentNode()
         sceneView.scene.rootNode.addChildNode(confettiNode)
-
+        self.score += 1
+        
+        DispatchQueue.main.async {
+            self.scoreLabel.text = "\(self.score)"
+        }
     }
     
 
 }
 
-func + (left: SCNVector3, right: SCNVector3) -> SCNVector3 {
+func +(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
     return SCNVector3(left.x + right.x, left.y + right.y, left.z + right.z)
+}
+
+func randomNumbers(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat {
+    return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
 }
 
