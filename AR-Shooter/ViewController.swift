@@ -9,6 +9,7 @@
 import UIKit
 import ARKit
 import Each
+
 enum BitMaskCategory : Int {
     case bullet = 2
     case target = 3
@@ -24,10 +25,19 @@ class ViewController: UIViewController, ARSCNViewDelegate,  SCNPhysicsContactDel
     var power : Float = 50
     var target : SCNNode?
     var score = 0
+     var timer = Each(2).seconds
     
-    // Instantiate the audio source
-    let audioSource = SCNAudioSource(fileNamed: "jump.mp3")!
-    var timer = Each(2).seconds
+    let backgroundMusic : String = "song"
+    
+    var player : AVAudioPlayer = AVAudioPlayer()
+    
+    let audioSource : SCNAudioSource = {
+        let audio = SCNAudioSource(fileNamed: "jump.mp3")!
+        audio.loops = false
+        audio.load()
+        return audio
+    }()
+   
 
     
     override func viewDidLoad() {
@@ -37,40 +47,40 @@ class ViewController: UIViewController, ARSCNViewDelegate,  SCNPhysicsContactDel
                                        ARSCNDebugOptions.showWorldOrigin]
         
         sceneView.autoenablesDefaultLighting = true
-//        configuration.planeDetection = .horizontal
         self.sceneView.scene.physicsWorld.contactDelegate = self
         self.sceneView.delegate = self
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         sceneView.addGestureRecognizer(tapGestureRecognizer)
-        
         tapGestureRecognizer.cancelsTouchesInView = false
+        
+        self.start()
+        self.playBackgroundMusic()
         sceneView.session.run(configuration)
-        
-        self.timer.perform{ () -> NextStep in
-            self.createEgg()
-            return .continue
-        }
-        
-        
-        // As an environmental sound layer, audio should play indefinitely
-        audioSource.loops = false
-        // Decode the audio from disk ahead of time to prevent a delay in playback
-        audioSource.load()
     }
     
     
-    func createEgg(){
+    func start(){
 //        guard let pointOfView = self.sceneView.pointOfView else {return}
-        
 //        let transform = pointOfView.transform
 //        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
 //        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
-//
 //        let position = location + orientation
         
-        addEgg(x: Float(randomNumbers(firstNum: -1, secondNum: 1)), y:  Float(randomNumbers(firstNum: 0, secondNum: 3)), z: Float(randomNumbers(firstNum: -2, secondNum: -10)))
+        self.timer.perform{ () -> NextStep in
+            self.addEgg(x: Float(randomNumbers(firstNum: -2, secondNum: 2)), y:  Float(randomNumbers(firstNum: 0, secondNum: 3)), z: Float(randomNumbers(firstNum: -2, secondNum: -10)))
+            
+            return .continue
+        }
     }
     
+    
+    func reset(){
+        player.stop()
+        score = 0
+        scoreLabel.text = "\(score)"
+        
+    }
     
     @IBAction func addTargets(_ sender: UIButton) {
         guard let pointOfView = self.sceneView.pointOfView else {return}
@@ -110,7 +120,7 @@ class ViewController: UIViewController, ARSCNViewDelegate,  SCNPhysicsContactDel
         
         let position = location + orientation
         
-        let bullet = SCNNode(geometry: SCNSphere(radius: 0.1))
+        let bullet = SCNNode(geometry: SCNSphere(radius: 0.07))
         bullet.geometry?.firstMaterial?.diffuse.contents = UIColor.red
         bullet.position = position
         bullet.name = "bullet"
@@ -157,7 +167,20 @@ class ViewController: UIViewController, ARSCNViewDelegate,  SCNPhysicsContactDel
         }
     }
     
-
+    
+    func playBackgroundMusic(){
+        do {
+            let audioPath = Bundle.main.path(forResource: self.backgroundMusic , ofType: "mp3")
+            try player = AVAudioPlayer(contentsOf: NSURL(fileURLWithPath: audioPath!) as URL)
+            player.volume = 0.5
+        } catch {}
+        let session = AVAudioSession.sharedInstance()
+        do {
+            try session.setCategory(AVAudioSessionCategoryPlayback)
+        } catch{ }
+        player.play()
+    }
+    
 }
 
 func +(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
